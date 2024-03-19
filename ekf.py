@@ -81,14 +81,23 @@ g_t = np.array([
 ])
 
 # Process noise covariance matrix Sigma_xt (Σ_x,t)
-def Sigma_xt(v, a):
-    return np.diag([
-        (sigma_fwd * np.abs(v))**2,
-        (sigma_side * np.abs(v))**2,
-        (sigma_theta_dot * np.abs(v))**2,
-        (sigma_a * np.abs(a))**2,
-        0
-    ])
+# def Sigma_xt(v, a):
+#     return np.diag([
+#         (sigma_fwd * np.abs(v))**2,
+#         (sigma_side * np.abs(v))**2,
+#         (sigma_theta_dot * np.abs(v))**2,
+#         (sigma_a * np.abs(a))**2,
+#         0
+#     ])
+
+def Sigma_xt(v, theta, a):
+    return np.array([
+    [(v*np.cos(theta)*delta_t*sigma_fwd)**2, (v*np.sin(theta)*delta_t*sigma_side)**2, 0, 0, 0],
+    [(v*np.sin(theta)*delta_t*sigma_fwd)**2, (v*np.cos(theta)*delta_t*sigma_side)**2, 0, 0, 0],
+    [0, 0, (sigma_theta_dot * np.abs(v))**2, 0, 0],
+    [0, 0, 0, (sigma_a * np.abs(a))**2, 0],
+    [0, 0, 0, 0, 0]
+])
 
 # Measurement noise covariance matrix Sigma_zt (Σ_z,t)
 Sigma_zt = np.diag([
@@ -108,8 +117,8 @@ def predict(x, P, u):
     Ft = F_t(x, u)
     
     # Compute the process noise covariance for the control input
-    v, a = x[3], u[0]  # Assuming u = [a, delta_phi]
-    Sigma_xt_cur = Sigma_xt(v, a)
+    v,theta, a = x[3], x[2], u[0]  # Assuming u = [a, delta_phi]
+    Sigma_xt_cur = Sigma_xt(v, theta, a)
     
     # Compute the predicted covariance
     P_pred = Ft @ P @ Ft.T + Sigma_xt_cur
