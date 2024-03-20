@@ -1,3 +1,1 @@
-# Extended Kalman Filter for State Estimation
-
-State estimation of a Dubin's Car using Extended Kalman Filter.
+# State Estimation of a Dubin's Car Model using Extended Kalman Filter and Particle Filters
