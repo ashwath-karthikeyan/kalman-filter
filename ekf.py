@@ -85,8 +85,8 @@ def read_ground_truth_states(filename):
             states.append([float(part) for part in parts])
     return states
 
-controls, observations = read_controls_observations('controls_observations1.txt')
-ground_truth_states = read_ground_truth_states('ground_truth_states1.txt')
+controls, observations = read_controls_observations('dataset/controls_observations1.txt')
+ground_truth_states = read_ground_truth_states('dataset/ground_truth_states1.txt')
 
 # EKF Algorithm
 estimated_states = []  # Initialize list to store estimated states
