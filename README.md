@@ -23,4 +23,4 @@ To run the Extended Kalman Filter, use:
 python3 ekf.py
 ```
 
-### For some intense documentation, click [here](ashwath.net/kalman-filter).
+### For some intense documentation, click [here](https://ashwath.net/kalman-filter/).
