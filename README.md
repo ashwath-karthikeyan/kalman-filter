@@ -22,3 +22,5 @@ To run the Extended Kalman Filter, use:
 ```bash
 python3 ekf.py
 ```
+
+### For some intense documentation, click [here](ashwath.net/kalman-filter).
